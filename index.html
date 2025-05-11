@@ -9,45 +9,45 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/ScrollMagic.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
     <style>
-        /* Base Styles */
+       /* Base Styles */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Cormorant Garamond', serif;
         }
-
+        
         @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Great+Vibes&family=Montserrat:wght@300;400;500&display=swap');
-
+        
         :root {
             --primary-gold: #c8a06b;
-            --dark-brown: #4a3b31;
-            --medium-brown: #7d6b5f;
-            --light-cream: #fdfaf6;
-            --soft-green: #8f9779;
-            --light-green-accent: #bac0aa;
+            --dark-brown: #4a3b31; /* For shadows or dark accents */
+            --medium-brown: #7d6b5f; /* Kept for potential other uses */
+            --light-cream: #fdfaf6; /* For text on dark backgrounds, or light backgrounds for elements */
             --text-on-dark: #f0e9e1;
-
-            /* New Green Text Variables */
-            --deep-forest-green: #2d402b; /* Very dark green for base text */
-            --rich-emerald-green: #3a5a40; /* Rich green for headings/accents */
+        
+            /* Green Palette */
+            --deep-forest-green: #2d402b; /* Very dark green for base text / heading fallbacks on light bg */
+            --rich-emerald-green: #3a5a40; /* Rich green for headings/accents, gradient part */
             --muted-sage-green: #588157; /* Softer green for secondary text */
+            --soft-green: #8f9779;      /* For flourishes, accents, gradient part */
             --light-moss-green: #a3b18a; /* Lighter green for less emphasis or on dark backgrounds */
+            --light-green-accent: #bac0aa; /* For subtle borders, accents */
         }
-
+        
         html {
              scroll-behavior: smooth;
         }
-
+        
         body {
             background-image: url('https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
             background-size: cover;
             background-position: center center;
             background-attachment: fixed;
-            color: var(--deep-forest-green); /* Base text color changed to deep green */
+            color: var(--deep-forest-green);
             overflow-x: hidden;
         }
-
+        
         /* Hero Section */
         .hero {
             min-height: 100vh;
@@ -61,7 +61,7 @@
             padding: 4rem 1rem;
             overflow: hidden;
         }
-
+        
         #particles-js {
             position: absolute;
             width: 100%;
@@ -70,7 +70,7 @@
             left: 0;
             z-index: 1;
         }
-
+        
         .hero-content {
             position: relative;
             z-index: 2;
@@ -83,7 +83,7 @@
             border-radius: 12px;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15), 0 5px 15px rgba(0,0,0,0.1);
         }
-
+        
         .hero-flourish {
             width: 150px;
             height: auto;
@@ -94,44 +94,42 @@
         .hero-flourish svg path {
             stroke: var(--soft-green);
         }
-
-        .names { /* Applying gradient for "texture" */
+        
+        .names {
             font-family: 'Great Vibes', cursive;
             font-size: 5rem;
             margin: 1rem 0;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.1); /* Softer shadow for green text */
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
             opacity: 0;
             animation: fadeIn 2s ease forwards 1.5s;
-            /* Green Gradient for "texture" */
             background: linear-gradient(135deg, var(--rich-emerald-green), var(--soft-green));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            text-fill-color: transparent;
-            /* Fallback for browsers that don't support background-clip: text */
-            color: color: var(--texture-green, #2a6d40);
+            /* text-fill-color: transparent; /* text-fill-color is not standard on its own */
+            color: var(--deep-forest-green); /* Fallback */
         }
-
+        
         .date {
             font-family: 'Montserrat', sans-serif;
             font-size: 1.5rem;
             letter-spacing: 3px;
             margin: 1rem 0;
             text-transform: uppercase;
-            color: var(--muted-sage-green); /* Changed from medium-brown */
+            color: var(--muted-sage-green);
             opacity: 0;
             animation: fadeIn 2s ease forwards 2s;
         }
-
+        
         .invitation-text {
             font-size: 1.25rem;
             line-height: 1.8;
             margin: 1.5rem 0;
             opacity: 0;
             animation: fadeIn 2s ease forwards 2.5s;
-            color: var(--deep-forest-green); /* Changed from dark-brown */
+            color: var(--deep-forest-green);
         }
-
+        
         /* Countdown */
         .countdown {
             display: flex;
@@ -141,28 +139,21 @@
             opacity: 0;
             animation: fadeIn 2s ease forwards 2.2s;
         }
-
-        .countdown-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
+        .countdown-item { display: flex; flex-direction: column; align-items: center; }
         .countdown-number {
             font-size: 2.5rem;
             font-weight: 600;
-            color: var(--primary-gold); /* Keeping gold for contrast, or could be var(--rich-emerald-green) */
+            color: var(--primary-gold);
             font-family: 'Montserrat', sans-serif;
         }
-
         .countdown-label {
             font-size: 0.9rem;
             text-transform: uppercase;
             letter-spacing: 1px;
-            color: var(--muted-sage-green); /* Changed from medium-brown */
+            color: var(--muted-sage-green);
             font-family: 'Montserrat', sans-serif;
         }
-
+        
         .scroll-down {
             position: absolute;
             bottom: 2rem;
@@ -171,7 +162,7 @@
             font-size: 0.9rem;
             font-family: 'Montserrat', sans-serif;
             color: var(--light-cream);
-            background-color: rgba(45, 64, 43, 0.6); /* Darker green backing */
+            background-color: rgba(45, 64, 43, 0.6);
             padding: 0.5rem 1rem;
             border-radius: 20px;
             display: flex;
@@ -182,61 +173,44 @@
             cursor: pointer;
             z-index: 2;
         }
-        .scroll-down svg path {
-            stroke: var(--light-cream);
-        }
+        .scroll-down svg path { stroke: var(--light-cream); }
         .scroll-down i { margin-top: 0.5rem; }
-
+        
         /* Generic Section Title */
-        .section-title { /* Applying gradient for "texture" */
+        .section-title {
             font-family: 'Great Vibes', cursive;
             font-size: 3.5rem;
             margin-bottom: 1rem;
             position: relative;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.05); /* Lighter shadow for green */
-            /* Green Gradient for "texture" */
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
             background: linear-gradient(135deg, var(--rich-emerald-green), var(--soft-green));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            text-fill-color: transparent;
-            /* Fallback */
-            color: var(--rich-emerald-green);
+            /* text-fill-color: transparent; */
+            color: var(--rich-emerald-green); /* Fallback */
         }
         .section-title::before, .section-title::after {
-            content: '';
-            display: block;
-            width: 60px;
-            height: 1px;
-            background-color: var(--soft-green); /* Lines remain soft green */
-            margin: 0.5rem auto;
+            content: ''; display: block; width: 60px; height: 1px;
+            background-color: var(--soft-green); margin: 0.5rem auto;
         }
         .section-title::before { margin-bottom: 1rem; }
         .section-title::after { margin-top: 1rem; margin-bottom: 2.5rem; }
-
-
+        
         /* --- Event Details Section --- */
-        .event-details {
-            padding: 6rem 2rem;
-            text-align: center;
-        }
-
+        .event-details { padding: 6rem 2rem; text-align: center; }
         .details-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2.5rem;
-            max-width: 1000px;
-            margin: 0 auto;
+            gap: 2.5rem; max-width: 1000px; margin: 0 auto;
         }
-
         .detail-card {
             background-color: rgba(253, 250, 246, 0.9);
             border-radius: 10px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1), 0 3px 10px rgba(0,0,0,0.07);
             padding: 2.5rem;
             transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
-            opacity: 0;
-            transform: translateY(50px);
+            opacity: 0; transform: translateY(50px);
             border: 1px solid rgba(186, 192, 170, 0.5);
         }
         .detail-card.visible { opacity: 1; transform: translateY(0); }
@@ -244,217 +218,117 @@
             transform: translateY(-12px) scale(1.03);
             box-shadow: 0 18px 45px rgba(0, 0, 0, 0.15), 0 8px 20px rgba(0,0,0,0.1);
         }
-
         .detail-icon { margin-bottom: 1.5rem; line-height: 0; }
         .detail-icon svg { width: 48px; height: 48px; }
-        .detail-icon svg path, .detail-icon svg circle {
-           stroke: var(--primary-gold); /* Icons remain gold for accent */
-        }
+        .detail-icon svg path, .detail-icon svg circle { stroke: var(--primary-gold); }
         .detail-icon svg .calendar-dot { fill: var(--primary-gold); }
-
         .detail-title {
-            font-size: 1.6rem;
-            margin-bottom: 1rem;
-            color: var(--rich-emerald-green); /* Changed from dark-brown */
-            font-weight: 600;
+            font-size: 1.6rem; margin-bottom: 1rem;
+            color: var(--rich-emerald-green); font-weight: 600;
         }
-
         .detail-text {
-            font-size: 1.05rem;
-            line-height: 1.7;
-            color: var(--deep-forest-green); /* Changed from medium-brown */
-            margin-bottom: 2rem;
+            font-size: 1.05rem; line-height: 1.7;
+            color: var(--deep-forest-green); margin-bottom: 2rem;
             font-family: 'Montserrat', sans-serif;
         }
-        .detail-text strong {
-            color: var(--rich-emerald-green); /* Darker green for strong text */
-        }
-
+        .detail-text strong { color: var(--rich-emerald-green); }
         .detail-button {
-            display: inline-block;
-            padding: 0.9rem 2.2rem;
-            background-color: var(--soft-green);
-            color: var(--light-cream); /* Text on button remains light for contrast */
-            border: none;
-            border-radius: 50px;
-            text-decoration: none;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.9rem;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            display: inline-block; padding: 0.9rem 2.2rem;
+            background-color: var(--soft-green); color: var(--light-cream);
+            border: none; border-radius: 50px; text-decoration: none;
+            font-family: 'Montserrat', sans-serif; font-size: 0.9rem; font-weight: 500;
+            text-transform: uppercase; letter-spacing: 1px;
             transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-            cursor: pointer;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            cursor: pointer; box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
         .detail-button:hover {
-            background-color: #7c836c;
-            transform: translateY(-3px);
+            background-color: #7c836c; transform: translateY(-3px);
             box-shadow: 0 4px 10px rgba(0,0,0,0.15);
         }
-
+        
         /* --- RSVP Section --- */
-        .rsvp {
-            padding: 6rem 2rem;
-            text-align: center;
-            position: relative;
-        }
+        .rsvp { padding: 6rem 2rem; text-align: center; position: relative; }
         #rsvp { scroll-margin-top: 80px; }
-
         .rsvp > p {
-            max-width: 600px;
-            margin: -1rem auto 2.5rem;
-            font-size: 1.1rem;
-            line-height: 1.6;
-            color: var(--deep-forest-green); /* Changed from dark-brown */
-            background-color: rgba(253, 250, 246, 0.7);
-            padding: 1rem;
-            border-radius: 8px;
+            max-width: 600px; margin: -1rem auto 2.5rem; font-size: 1.1rem; line-height: 1.6;
+            color: var(--deep-forest-green); background-color: rgba(253, 250, 246, 0.7);
+            padding: 1rem; border-radius: 8px;
         }
-
         .rsvp-form-container {
-            max-width: 650px;
-            margin: 0 auto;
-            padding: 3rem;
+            max-width: 650px; margin: 0 auto; padding: 3rem;
             background-color: rgba(253, 250, 246, 0.92);
             border-radius: 10px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1), 0 3px 10px rgba(0,0,0,0.07);
-            position: relative;
-            opacity: 0;
-            transform: translateY(50px);
+            position: relative; opacity: 0; transform: translateY(50px);
             transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
             border: 1px solid rgba(186, 192, 170, 0.5);
         }
          .rsvp-form-container.visible { opacity: 1; transform: translateY(0); }
         .rsvp-form-container::before {
-             content: '';
-             position: absolute;
-             top: -10px; left: -10px; right: -10px; bottom: -10px;
-             border: 1px solid var(--light-green-accent);
-             border-radius: 14px;
-             z-index: -1;
-             pointer-events: none;
+             content: ''; position: absolute; top: -10px; left: -10px; right: -10px; bottom: -10px;
+             border: 1px solid var(--light-green-accent); border-radius: 14px;
+             z-index: -1; pointer-events: none;
         }
-
         .form-group { margin-bottom: 1.5rem; text-align: left; }
-
         label {
-            display: block;
-            margin-bottom: 0.6rem;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.9rem;
-            color: var(--rich-emerald-green); /* Changed from dark-brown */
-            font-weight: 500;
+            display: block; margin-bottom: 0.6rem; font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem; color: var(--rich-emerald-green); font-weight: 500;
         }
-
-        input[type="text"],
-        input[type="email"],
-        input[type="number"],
-        select,
-        textarea {
-            width: 100%;
-            padding: 0.9rem 1rem;
-            border: 1px solid var(--light-green-accent);
-            border-radius: 4px;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1rem;
-            color: var(--deep-forest-green); /* Text input color */
-            background-color: #fff;
+        input[type="text"], input[type="email"], input[type="number"], select, textarea {
+            width: 100%; padding: 0.9rem 1rem; border: 1px solid var(--light-green-accent);
+            border-radius: 4px; font-family: 'Montserrat', sans-serif; font-size: 1rem;
+            color: var(--deep-forest-green); background-color: #fff;
             transition: border-color 0.3s ease, box-shadow 0.3s ease;
         }
-        input::placeholder, textarea::placeholder {
-            color: var(--muted-sage-green); /* Placeholder text color */
-            opacity: 0.8;
-        }
+        input::placeholder, textarea::placeholder { color: var(--muted-sage-green); opacity: 0.8; }
         input:focus, select:focus, textarea:focus {
-             outline: none;
-             border-color: var(--soft-green);
+             outline: none; border-color: var(--soft-green);
              box-shadow: 0 0 0 3px rgba(143, 151, 121, 0.25);
         }
         textarea { resize: vertical; min-height: 100px; }
-
         .submit-btn {
-            display: inline-block;
-            padding: 1rem 3rem;
-            background-color: var(--primary-gold); /* Gold button */
-            color: var(--dark-brown); /* Dark brown text on gold for contrast */
-            border: none;
-            border-radius: 50px;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            cursor: pointer;
+            display: inline-block; padding: 1rem 3rem; background-color: var(--primary-gold);
+            color: var(--dark-brown); border: none; border-radius: 50px;
+            font-family: 'Montserrat', sans-serif; font-size: 1rem; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 1px; cursor: pointer;
             transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-            margin-top: 1.5rem;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-top: 1.5rem; box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
         .submit-btn:hover {
-            background-color: #b8915e;
-            transform: translateY(-3px);
+            background-color: #b8915e; transform: translateY(-3px);
             box-shadow: 0 4px 10px rgba(0,0,0,0.15);
         }
-
+        
         /* Footer */
         footer {
-            background-color: rgba(45, 64, 43, 0.9); /* Darker, richer green semi-transparent background */
-            color: var(--text-on-dark); /* Light text on dark green bg */
-            padding: 4rem 2rem;
-            text-align: center;
-            margin-top: 4rem;
-            border-top: 2px solid var(--light-moss-green); /* Lighter green border */
+            background-color: rgba(45, 64, 43, 0.9); color: var(--text-on-dark);
+            padding: 4rem 2rem; text-align: center; margin-top: 4rem;
+            border-top: 2px solid var(--light-moss-green);
         }
-
         .footer-content { max-width: 800px; margin: 0 auto; }
-
-        .footer-names { /* Applying gradient for "texture" */
-            font-family: 'Great Vibes', cursive;
-            font-size: 2.8rem;
-            margin-bottom: 1rem;
-             /* Green Gradient for "texture" - lighter for footer */
+        .footer-names {
+            font-family: 'Great Vibes', cursive; font-size: 2.8rem; margin-bottom: 1rem;
             background: linear-gradient(135deg, var(--light-moss-green), var(--light-green-accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-fill-color: transparent;
-            /* Fallback */
-            color: var(--light-moss-green);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text; /* text-fill-color: transparent; */
+            color: var(--light-moss-green); /* Fallback */
         }
-
         .hashtag {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.2rem;
-            margin: 1.5rem 0;
-            color: var(--light-green-accent); /* Was already a light green, looks good */
-            font-weight: 500;
+            font-family: 'Montserrat', sans-serif; font-size: 1.2rem; margin: 1.5rem 0;
+            color: var(--light-green-accent); font-weight: 500;
         }
-
         .social-links { margin: 2rem 0; }
         .social-links a {
-            display: inline-block;
-            margin: 0 1rem;
-            color: var(--text-on-dark); /* Light icon color on dark footer */
-            font-size: 1.5rem;
-            transition: color 0.3s ease, transform 0.3s ease;
+            display: inline-block; margin: 0 1rem; color: var(--text-on-dark);
+            font-size: 1.5rem; transition: color 0.3s ease, transform 0.3s ease;
         }
-        .social-links a:hover {
-            color: var(--primary-gold); /* Gold hover for accent */
-            transform: scale(1.15) translateY(-2px);
-        }
+        .social-links a:hover { color: var(--primary-gold); transform: scale(1.15) translateY(-2px); }
         .social-links svg { stroke: currentColor; }
-
         .copyright {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.9rem;
-            opacity: 0.8;
-            margin-top: 2.5rem;
-            color: var(--light-green-accent); /* Light green for copyright */
+            font-family: 'Montserrat', sans-serif; font-size: 0.9rem; opacity: 0.8;
+            margin-top: 2.5rem; color: var(--light-green-accent);
         }
-
-        /* Modal (Placeholder if Gallery is added) */
-        .modal { /* ... modal styles ... */ }
-
+        
         /* Animations */
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
@@ -463,12 +337,21 @@
             40% { transform: translate(-50%, -10px); }
             60% { transform: translate(-50%, -5px); }
         }
-
+        
         /* Responsive Styles */
         @media (max-width: 768px) {
-            .names, .section-title, .footer-names { background-image: none; /* Disable gradient on smaller for performance/simplicity */ }
-            .names { 
-                font-size: 3.5rem; 
+            .names, .section-title, .footer-names {
+                background-image: none !important;
+                -webkit-background-clip: initial !important; /* Reset for WebKit */
+                background-clip: initial !important; /* Reset standard */
+                -webkit-text-fill-color: initial !important; /* Reset for WebKit */
+                /* text-fill-color: initial !important; /* Reset standard, not needed if background-clip is initial */
+            }
+        
+            .names {
+                font-size: 3.5rem;
+                color: var(--deep-forest-green); /* Dark green on light cream hero-content */
+                text-shadow: 1px 1px 2px rgba(0,0,0,0.15);
             }
             .date { font-size: 1.2rem; }
             .invitation-text { font-size: 1.1rem; }
@@ -476,23 +359,29 @@
             .countdown { gap: 1.5rem; }
             .countdown-number { font-size: 2rem; }
             .countdown-label { font-size: 0.8rem; }
-            .section-title { 
+        
+            .section-title {
                 font-size: 2.8rem;
+                color: var(--light-cream); /* Light cream for contrast on body background image */
+                text-shadow: 1px 1px 3px var(--dark-brown); /* Stronger shadow to lift text */
             }
             .details-grid { grid-template-columns: 1fr; max-width: 500px; }
             .detail-card { padding: 2rem; }
-            .detail-title {
-                font-size: 1.6rem;
-                color: var(--texture-green, #2a6d40); /* Added explicit color for detail-title */
-                font-weight: 700; /* Make bolder on mobile */
-            }
             .rsvp-form-container { padding: 2.5rem; }
-            .footer-names { font-size: 2.2rem; color: var(--light-moss-green); }
+        
+            .footer-names {
+                font-size: 2.2rem;
+                color: var(--light-moss-green); /* Light moss green on dark footer */
+                text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+            }
             .hashtag { font-size: 1.1rem; }
             .social-links a { font-size: 1.4rem; margin: 0 0.8rem;}
         }
+        
         @media (max-width: 480px) {
-            .names { font-size: 2.8rem; }
+            .names {
+                font-size: 2.8rem; /* Smaller, but should be legible with solid color */
+            }
             .date { font-size: 1rem; }
             .invitation-text { font-size: 1rem; }
             .hero-content { padding: 1.5rem; margin-left: 0.5rem; margin-right: 0.5rem; }
@@ -502,20 +391,18 @@
             .countdown-label { font-size: 0.7rem; }
             .details-grid { gap: 1.5rem; }
             .detail-card { padding: 1.5rem; }
-            .detail-title { 
-                font-size: 1.4rem; 
-                color: var(--texture-green, #2a6d40); /* Added explicit color for detail-title */
-                font-weight: 700; /* Keep bold for smallest screens */
-            }
+            .detail-title { font-size: 1.4rem; }
             .detail-text { font-size: 1rem; }
             .detail-button { padding: 0.8rem 1.8rem; font-size: 0.8rem; }
             .rsvp > p { margin-left: 0.5rem; margin-right: 0.5rem; padding: 0.8rem; }
             .rsvp-form-container { padding: 1.5rem; margin-left: 0.5rem; margin-right: 0.5rem; max-width: calc(100% - 1rem); }
             .submit-btn { padding: 0.8rem 2rem; font-size: 0.9rem; }
-            .section-title { font-size: 2.5rem; }
             label { font-size: 0.85rem;}
             input[type="text"], input[type="email"], input[type="number"], select, textarea { padding: 0.8rem; font-size: 0.9rem;}
             footer { padding: 3rem 1rem; }
+            .section-title {
+                font-size: 2.5rem; /* Further reduced for smallest screens */
+            }
         }
     </style>
 </head>
