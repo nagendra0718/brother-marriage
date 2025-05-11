@@ -467,22 +467,32 @@
         /* Responsive Styles */
         @media (max-width: 768px) {
             .names, .section-title, .footer-names { background-image: none; /* Disable gradient on smaller for performance/simplicity */ }
-            .names { font-size: 3.5rem; color: color: var(--texture-green, #2a6d40); }
+            .names { 
+                font-size: 3.5rem; 
+                color: var(--texture-green, #2a6d40); /* Fixed: removed extra "color:" */
+            }
             .date { font-size: 1.2rem; }
             .invitation-text { font-size: 1.1rem; }
             .hero-content { padding: 2rem; }
             .countdown { gap: 1.5rem; }
             .countdown-number { font-size: 2rem; }
             .countdown-label { font-size: 0.8rem; }
-            .section-title { font-size: 2.8rem; color: color: var(--texture-green, #2a6d40); }
+            .section-title { 
+                font-size: 2.8rem; 
+                color: var(--texture-green, #2a6d40); /* Fixed: removed extra "color:" */
+            }
             .details-grid { grid-template-columns: 1fr; max-width: 500px; }
             .detail-card { padding: 2rem; }
+            .detail-title {
+                font-size: 1.6rem;
+                color: var(--texture-green, #2a6d40); /* Added explicit color for detail-title */
+                font-weight: 700; /* Make bolder on mobile */
+            }
             .rsvp-form-container { padding: 2.5rem; }
             .footer-names { font-size: 2.2rem; color: var(--light-moss-green); }
             .hashtag { font-size: 1.1rem; }
             .social-links a { font-size: 1.4rem; margin: 0 0.8rem;}
         }
-
         @media (max-width: 480px) {
             .names { font-size: 2.8rem; }
             .date { font-size: 1rem; }
@@ -494,16 +504,20 @@
             .countdown-label { font-size: 0.7rem; }
             .details-grid { gap: 1.5rem; }
             .detail-card { padding: 1.5rem; }
-            .detail-title { font-size: 1.4rem; }
+            .detail-title { 
+                font-size: 1.4rem; 
+                color: var(--texture-green, #2a6d40); /* Added explicit color for detail-title */
+                font-weight: 700; /* Keep bold for smallest screens */
+            }
             .detail-text { font-size: 1rem; }
             .detail-button { padding: 0.8rem 1.8rem; font-size: 0.8rem; }
             .rsvp > p { margin-left: 0.5rem; margin-right: 0.5rem; padding: 0.8rem; }
             .rsvp-form-container { padding: 1.5rem; margin-left: 0.5rem; margin-right: 0.5rem; max-width: calc(100% - 1rem); }
             .submit-btn { padding: 0.8rem 2rem; font-size: 0.9rem; }
+            .section-title { font-size: 2.5rem; }
             label { font-size: 0.85rem;}
             input[type="text"], input[type="email"], input[type="number"], select, textarea { padding: 0.8rem; font-size: 0.9rem;}
             footer { padding: 3rem 1rem; }
-            .section-title { font-size: 2.5rem; }
         }
     </style>
 </head>
